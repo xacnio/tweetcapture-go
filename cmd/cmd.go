@@ -14,7 +14,7 @@ func RunCmd() {
 	app.Name = "tweetcapture-go"
 	app.Usage = "simple tweet screenshot tool"
 	app.UsageText = app.Name + " [options] [Tweet URL]"
-	app.Version = "v1.0.0"
+	app.Version = "v1.0.1"
 
 	registerArgs(app)
 	registerAction(app)
@@ -29,6 +29,7 @@ func registerArgs(app *cli.App) {
 	app.Flags = []cli.Flag{
 		cli.UintFlag{Name: "nightmode, n", Value: 0, Usage: "0-Light / 1-Dim / 2-Lights out"},
 		cli.BoolFlag{Name: "seleniumdebug, sd", Hidden: true},
+		cli.StringFlag{Name: "output, o", Value: "", Usage: "File path to save screenshot"},
 	}
 }
 
@@ -41,6 +42,7 @@ func registerAction(app *cli.App) {
 		tss := tweetcapture.NewTweetScreenshot(url)
 		tss.Opts.NightMode = uint8(c.Uint("nightmode"))
 		tss.Opts.SeleniumDebug = c.Bool("seleniumdebug")
+		tss.SavePath = c.String("output")
 		err := tss.Screenshot()
 		if err != nil {
 			return cli.NewExitError(err, 26)
