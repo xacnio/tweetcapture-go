@@ -13,14 +13,14 @@ import (
 )
 
 type tweetScreenshotConf struct {
-	URL string
-	Opts tweetScreenshotOpts
+	URL      string
+	Opts     tweetScreenshotOpts
 	SavePath string
 }
 
 type tweetScreenshotOpts struct {
-	NightMode uint8
-	SeleniumDebug bool
+	NightMode        uint8
+	SeleniumDebug    bool
 	ChromeDriverPath string
 }
 
@@ -47,7 +47,7 @@ func (c *tweetScreenshotConf) Screenshot() error {
 	}
 	const port = 8080
 
-	opts := []selenium.ServiceOption{}
+	var opts []selenium.ServiceOption
 	selenium.SetDebug(c.Opts.SeleniumDebug)
 
 	if len(c.SavePath) < 1 {
@@ -101,7 +101,7 @@ func (c *tweetScreenshotConf) Screenshot() error {
 		} else {
 			tryCount += 1
 			time.Sleep(time.Millisecond * 100)
-			if tryCount >= 50 * 5 {
+			if tryCount >= 50*5 {
 				return errors.New("timeout: tweet content not found")
 			}
 		}
@@ -126,7 +126,7 @@ func (c *tweetScreenshotConf) validURL() bool {
 }
 
 func (c *tweetScreenshotConf) nightModeCookie() *selenium.Cookie {
-	timestamp := uint(time.Now().Unix()+3600)
+	timestamp := uint(time.Now().Unix() + 3600)
 	nightMode := &selenium.Cookie{Name: "night_mode", Value: fmt.Sprintf("%d", c.Opts.NightMode), Path: "/", Domain: ".twitter.com", Expiry: timestamp, Secure: true}
 	return nightMode
 }

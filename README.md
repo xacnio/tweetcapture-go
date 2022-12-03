@@ -1,4 +1,9 @@
 # tweetcapture-go
+## Installation
+```
+go install github.com/Xacnio/tweetcapture-go@latest
+```
+
 ## Command-line Usage
 ```
 NAME:
