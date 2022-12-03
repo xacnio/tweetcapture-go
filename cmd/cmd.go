@@ -14,7 +14,7 @@ func RunCmd() {
 	app.Name = "tweetcapture-go"
 	app.Usage = "simple tweet screenshot tool"
 	app.UsageText = app.Name + " [options] [Tweet URL]"
-	app.Version = "v1.0.2"
+	app.Version = "v1.0.3"
 
 	registerArgs(app)
 	registerAction(app)
