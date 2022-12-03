@@ -14,7 +14,7 @@ func RunCmd() {
 	app.Name = "tweetcapture-go"
 	app.Usage = "simple tweet screenshot tool"
 	app.UsageText = app.Name + " [options] [Tweet URL]"
-	app.Version = "v1.0.1"
+	app.Version = "v1.0.2"
 
 	registerArgs(app)
 	registerAction(app)
@@ -23,7 +23,6 @@ func RunCmd() {
 		panic(err)
 	}
 }
-
 
 func registerArgs(app *cli.App) {
 	app.Flags = []cli.Flag{
